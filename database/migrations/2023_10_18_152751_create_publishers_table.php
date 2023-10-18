@@ -15,10 +15,9 @@ return new class extends Migration {
         Schema::create('publishers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('book');
             $table->unsignedBigInteger('book_id');
 
-            $table->foreign('book_id')->references('id')->on('books');
+            $table->foreign('book_id')->references('id')->on('books')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

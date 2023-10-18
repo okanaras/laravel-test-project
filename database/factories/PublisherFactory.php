@@ -17,7 +17,8 @@ class PublisherFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => fake()->name,
+            'book_id' => random_int(1, 20),
         ];
     }
 }

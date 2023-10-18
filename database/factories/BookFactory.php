@@ -17,7 +17,9 @@ class BookFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'title' => fake()->jobTitle,
+            'author_id' => random_int(1, 20),
+            'publisher_id' => random_int(1, 20)
         ];
     }
 }

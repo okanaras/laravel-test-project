@@ -17,7 +17,8 @@ class AuthorFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => fake()->firstName,
+            'book_id' => random_int(1, 20)
         ];
     }
 }
