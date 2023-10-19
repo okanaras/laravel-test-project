@@ -12,9 +12,14 @@ class AuthorController extends Controller
     // listeleme fonk
     public function index()
     {
+
         $authors = Author::query()
-            ->with(["books"])
-            ->paginate(10);
+            ->with([
+                "books",
+                // "publishers"
+            ])
+            ->paginate(5);
+        // dd($authors);
 
         return view("admin.author.list", compact("authors"));
     }
@@ -95,7 +100,6 @@ class AuthorController extends Controller
                     'status' => "succes",
                     "message" => "Basarili",
                     "data" => $author,
-                    "author_status" => $author->status
                 ]
             )
             ->setStatusCode(200);

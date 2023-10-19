@@ -37,6 +37,8 @@
                                 <th>#</th>
                                 <th>Name</th>
                                 <th>Book</th>
+                                <th>Created</th>
+                                <th>Updated</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -46,9 +48,11 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $author->name }}</td>
                                     @foreach ($author->books as $book)
-                                        {{-- <td>{{ $book->title }}</td> --}}
-                                        <td>{{ isset($book) ? $book->title : 'bos birak' }}</td>
+                                        <td>{{ $book->title }}</td>
+                                        {{-- <td>{{ isset($book) ? $book->title : 'bos birak' }}</td> --}}
                                     @endforeach
+                                    <td>{{ Carbon\Carbon::parse($author->created_at)->translatedFormat('d F Y') }}</td>
+                                    <td>{{ Carbon\Carbon::parse($author->updated_at)->translatedFormat('d F Y') }}</td>
                                     <td>
                                         <div>
                                             <a href="{{ route('author.edit', ['id' => $author->id]) }}"
@@ -69,6 +73,8 @@
                                 <th>#</th>
                                 <th>Name</th>
                                 <th>Book</th>
+                                <th>Created</th>
+                                <th>Updated</th>
                                 <th>Actions</th>
                             </tr>
                         </tfoot>

@@ -14,13 +14,14 @@ class Author extends Model
     protected $guarded = [];
 
     // iliskiler
+
     public function books(): HasMany
     {
-        return $this->hasMany(Book::class, "id", "book_id");
-    }
-    public function publisher(): BelongsToMany
-    {
-        return $this->BelongsToMany(Book::class, "id", "publish_id");
+        return $this->hasMany(Book::class, "author_id", "id");
     }
 
+    // public function publishers(): BelongsToMany
+    // {
+    //     return $this->BelongsToMany(Publisher::class, "id");
+    // }
 }
