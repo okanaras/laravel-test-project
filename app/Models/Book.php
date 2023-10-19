@@ -14,15 +14,25 @@ class Book extends Model
     use HasFactory;
     protected $guarded = [];
 
-
-
+    // kitaplar ile yazarlar arasinda hasone iliskisi yani her kitabin bir yazari olabilir
     public function authors(): HasOne
     {
         return $this->HasOne(Author::class, "id", "author_id");
     }
+
+    // kitaplar ile yayinevleri arasinda hasone iliskisi yani her kitabin bir yayinevi olabilir
     public function publishers(): HasOne
     {
         return $this->HasOne(Publisher::class, "id", "publisher_id");
     }
 
+
+
+    // scope tanimlamasi
+
+    public function scopeName($query, $title)
+    {
+        if (!is_null($title))
+            return $query->where("title", "LIKE", "%" . $title . "%");
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use App\Models\Publisher;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -9,15 +10,14 @@ use Illuminate\Http\Request;
 class PublisherController extends Controller
 {
     // listeleme fonk
-    public function index()
+    public function index(Request $request)
     {
         $publishers = Publisher::query()
             ->with([
                 "books",
-                // "authors"
             ])
+            ->name($request->name)
             ->paginate(5);
-        // dd($publishers);
 
         return view("admin.publisher.list", compact("publishers"));
     }
@@ -28,6 +28,7 @@ class PublisherController extends Controller
         return view("admin.publisher.create-update");
     }
 
+    // store fonk
     public function store(Request $request)
     {
         // sadece yazar adi kontrol edildigi icin ozel bir validation yapisi kurmadim.
@@ -45,6 +46,13 @@ class PublisherController extends Controller
         } catch (\Exception $exception) {
             abort(404, $exception->getMessage());
         }
+
+        // alert uyarisi verildi onay ile kapanmazsa kendisi 3sn sonra kendiliginden kapanacak
+        alert()
+            ->success('Basarili', "Yayinevi Kaydedildi!")
+            ->showConfirmButton('Tamam', '#3085d6')
+            ->autoClose(3000);
+
         return redirect()->back();
     }
 
@@ -79,6 +87,12 @@ class PublisherController extends Controller
         } catch (\Exception $exception) {
             abort(404, $exception->getMessage());
         }
+
+        // alert uyarisi verildi onay ile kapanmazsa kendisi 3sn sonra kendiliginden kapanacak
+        alert()
+            ->success('Basarili', "Yayinevi Guncellendi!")
+            ->showConfirmButton('Tamam', '#3085d6')
+            ->autoClose(3000);
 
         return redirect()->route('publisher.index');
     }

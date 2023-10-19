@@ -13,15 +13,18 @@ class Author extends Model
     use HasFactory;
     protected $guarded = [];
 
-    // iliskiler
-
-    public function books(): HasMany
+    // yazarlar ile kitaplar arasinda hasmany iliskisi yani bir yazar birden fazla kitap yazabilir
+    public function books()
     {
         return $this->hasMany(Book::class, "author_id", "id");
     }
 
-    // public function publishers(): BelongsToMany
-    // {
-    //     return $this->BelongsToMany(Publisher::class, "id");
-    // }
+
+    // scope tanimlamasi
+    public function scopeName($query, $name)
+    {
+        if (!is_null($name))
+            return $query->where("name", "LIKE", "%" . $name . "%");
+    }
+
 }

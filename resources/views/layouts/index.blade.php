@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 
 <head>
     <meta charset="utf-8">
@@ -15,35 +15,26 @@
     <!-- Title -->
     <title>@yield('title', 'Case Study')</title>
 
-    {{-- <!-- Styles -->
-    <link href="{{ asset('assets11/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-
-    <!-- Theme Styles -->
-    <link href="{{ asset('assets11/admin/css/main.min.css') }}" rel="stylesheet"> --}}
-
-
     <!-- Styles -->
 
+    <link href="{{ asset('assets/admin/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/admin/plugins/perfectscroll/perfect-scrollbar.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/admin/plugins/pace/pace.css') }}" rel="stylesheet">
 
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
+    {{-- aos animasyon css --}}
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
     <link
         href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
         rel="stylesheet">
-    <link href="{{ asset('assets1/admin/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets1/admin/plugins/perfectscroll/perfect-scrollbar.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets1/admin/plugins/pace/pace.css') }}" rel="stylesheet">
 
 
     <!-- Theme Styles -->
-    <link href="{{ asset('assets1/admin/css/main.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets1/admin/css/custom.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/admin/css/main.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/admin/css/custom.css') }}" rel="stylesheet">
 
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets1/admin/images/neptune.png') }}" />
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets1/admin/images/neptune.png') }}" />
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/admin/images/neptune.png') }}" />
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/admin/images/neptune.png') }}" />
 
     @yield('css')
 </head>
@@ -52,11 +43,10 @@
     <div class="app align-content-stretch d-flex flex-wrap">
         @include('layouts.admin.sidebar')
         <div class="app-container">
-
             {{-- header --}}
             @include('layouts.admin.header')
 
-            <div class="app-content">
+            <div class="app-content" data-aos="zoom-in-up" data-aos-duration="1000" data-aos-easing="ease-in-out">
                 <div class="content-wrapper">
                     <div class="container">
                         <div class="row">
@@ -70,23 +60,23 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 
-
-
     <!-- Javascripts -->
-    <script src="{{ asset('assets1/admin/plugins/jquery/jquery-3.5.1.min.js') }}"></script>
-    <script src="{{ asset('assets1/admin/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('assets1/admin/plugins/perfectscroll/perfect-scrollbar.min.js') }}"></script>
-    <script src="{{ asset('assets1/admin/plugins/pace/pace.min.js') }}"></script>
-    <script src="{{ asset('assets1/admin/plugins/apexcharts/apexcharts.min.js') }}"></script>
-    <script src="{{ asset('assets1/admin/js/main.min.js') }}"></script>
-    <script src="{{ asset('assets1/admin/js/custom.js') }}"></script>
-    <script src="{{ asset('assets1/admin/js/pages/dashboard.js') }}"></script>
+    <script src="{{ asset('assets/admin/plugins/jquery/jquery-3.5.1.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/plugins/perfectscroll/perfect-scrollbar.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/plugins/pace/pace.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/plugins/apexcharts/apexcharts.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/main.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/custom.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/pages/dashboard.js') }}"></script>
+    {{-- aos anismasyon js  --}}
+    <script script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 
-    {{-- ajax setup --}}
+
+    {{-- ajax and aos setup --}}
     <script>
         $(document).ready(function() {
             $.ajaxSetup({
@@ -94,9 +84,12 @@
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 }
             });
+
+            AOS.init();
         });
     </script>
 
+    @include('sweetalert::alert')
     @yield('js')
 
 </body>

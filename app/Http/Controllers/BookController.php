@@ -12,14 +12,14 @@ class BookController extends Controller
 {
 
     // listeleme fonk
-    public function index()
+    public function index(Request $request)
     {
-
         $books = Book::query()
             ->with([
                 "authors",
                 "publishers"
             ])
+            ->name($request->title)
             ->paginate(5);
         return view("admin.book.list", compact("books"));
     }
@@ -33,6 +33,7 @@ class BookController extends Controller
         return view("admin.book.create-update", compact("authors", "publishers"));
     }
 
+    // store fonk
     public function store(Request $request)
     {
         // validation.
@@ -54,6 +55,13 @@ class BookController extends Controller
         } catch (\Exception $exception) {
             abort(404, $exception->getMessage());
         }
+
+        // alert uyarisi verildi onay ile kapanmazsa kendisi 3sn sonra kendiliginden kapanacak
+        alert()
+            ->success('Basarili', "Kitap Kaydedildi!")
+            ->showConfirmButton('Tamam', '#3085d6')
+            ->autoClose(3000);
+
 
         return redirect()->back();
     }
@@ -98,6 +106,12 @@ class BookController extends Controller
         } catch (\Exception $exception) {
             abort(404, $exception->getMessage());
         }
+
+        // alert uyarisi verildi onay ile kapanmazsa kendisi 3sn sonra kendiliginden kapanacak
+        alert()
+            ->success('Basarili', "Kitap Guncellendi!")
+            ->showConfirmButton('Tamam', '#3085d6')
+            ->autoClose(3000);
 
         return redirect()->route('book.index');
     }

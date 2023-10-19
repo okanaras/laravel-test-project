@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::prefix("admin")->group(
     function () {
         Route::get('/', function () {
-            return view('layouts.index');
+            return view('home');
         })->name("admin.index");
 
         // author routes

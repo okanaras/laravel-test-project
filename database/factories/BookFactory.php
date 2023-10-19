@@ -18,8 +18,8 @@ class BookFactory extends Factory
     {
         return [
             'title' => fake()->jobTitle,
-            'author_id' => random_int(1, 20),
-            'publisher_id' => random_int(1, 20)
+            'author_id' => random_int(1, 10),
+            'publisher_id' => random_int(1, 10)
         ];
     }
 }

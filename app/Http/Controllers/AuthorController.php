@@ -10,16 +10,14 @@ use Illuminate\Http\Request;
 class AuthorController extends Controller
 {
     // listeleme fonk
-    public function index()
+    public function index(Request $request)
     {
-
         $authors = Author::query()
             ->with([
-                "books",
-                // "publishers"
+                "books"
             ])
+            ->name($request->name)
             ->paginate(5);
-        // dd($authors);
 
         return view("admin.author.list", compact("authors"));
     }
@@ -30,6 +28,7 @@ class AuthorController extends Controller
         return view("admin.author.create-update");
     }
 
+    // store fonk
     public function store(Request $request)
     {
         // sadece yazar adi kontrol edildigi icin ozel bir validation yapisi kurmadim.
@@ -48,6 +47,11 @@ class AuthorController extends Controller
             abort(404, $exception->getMessage());
         }
 
+        // alert uyarisi verildi onay ile kapanmazise kendisi
+        alert()
+            ->success('Basarili', "Yazar Kaydedildi!")
+            ->showConfirmButton('Tamam', '#3085d6')
+            ->autoClose(3000);
         return redirect()->back();
     }
 
@@ -82,6 +86,12 @@ class AuthorController extends Controller
         } catch (\Exception $exception) {
             abort(404, $exception->getMessage());
         }
+
+        // alert uyarisi verildi onay ile kapanmazsa kendisi 3sn sonra kendiliginden kapanacak
+        alert()
+            ->success('Basarili', "Yazar Guncellendi!")
+            ->showConfirmButton('Tamam', '#3085d6')
+            ->autoClose(3000);
 
         return redirect()->route('author.index');
     }

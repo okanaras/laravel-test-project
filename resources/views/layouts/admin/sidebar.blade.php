@@ -1,17 +1,11 @@
 <div class="app-sidebar">
     <div class="logo">
         <a href="{{ route('admin.index') }}" class="logo-icon"><span class="logo-text">Admin</span></a>
-        <div class="sidebar-user-switcher">
-            <a href="{{ route('admin.index') }}">
-                <span class="activity-indicator"></span>
-                <span class="user-info-text">User: <br><span class="user-state-info">Admin</span></span>
-            </a>
-        </div>
     </div>
     <div class="app-menu">
         <ul class="accordion-menu">
             <li class="sidebar-title">
-                Apps
+                Case Study
             </li>
             <li class="{{ Route::is('admin.index') ? 'open' : '' }}">
                 <a href="{{ route('admin.index') }}">
@@ -39,25 +33,6 @@
                     </li>
                 </ul>
             </li>
-            <li class="{{ Route::is('book.index') || Route::is('book.create') ? 'open' : '' }}">
-                <a href="javascript:void(0)" class="">
-                    <i class="material-icons">book</i>
-                    Books
-                    <i class="material-icons has-sub-menu">keyboard_arrow_right</i>
-                </a>
-                <ul class="sub-menu" style="">
-                    <li>
-                        <a href="{{ route('book.create') }}" class="{{ Route::is('book.create') ? 'active' : '' }}">
-                            Create Book
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('book.index') }}" class="{{ Route::is('book.index') ? 'active' : '' }}">Book
-                            List
-                        </a>
-                    </li>
-                </ul>
-            </li>
             <li class="{{ Route::is('publisher.index') || Route::is('publisher.create') ? 'open' : '' }}">
                 <a href="javascript:void(0)" class="">
                     <i class="material-icons">tune</i>
@@ -74,6 +49,25 @@
                     <li>
                         <a href="{{ route('publisher.index') }}"
                             class="{{ Route::is('publisher.index') ? 'active' : '' }}">Publisher
+                            List
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="{{ Route::is('book.index') || Route::is('book.create') ? 'open' : '' }}">
+                <a href="javascript:void(0)" class="">
+                    <i class="material-icons">book</i>
+                    Books
+                    <i class="material-icons has-sub-menu">keyboard_arrow_right</i>
+                </a>
+                <ul class="sub-menu" style="">
+                    <li>
+                        <a href="{{ route('book.create') }}" class="{{ Route::is('book.create') ? 'active' : '' }}">
+                            Create Book
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('book.index') }}" class="{{ Route::is('book.index') ? 'active' : '' }}">Book
                             List
                         </a>
                     </li>

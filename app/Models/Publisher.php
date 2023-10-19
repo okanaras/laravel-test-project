@@ -12,18 +12,17 @@ class Publisher extends Model
     use HasFactory;
     protected $guarded = [];
 
-    public function books(): HasMany
+
+    // yayinevi ile kitaplar arasinda hasmany iliskisi yani bir yayinevi birden fazla kitap yayinlayabilir
+    public function books()
     {
-        return $this->hasMany(Book::class, "publisher_id", "id");
+        return $this->hasMany(Book::class);
     }
 
-    // public function books(): HasMany
-    // {
-    //     return $this->hasMany(Book::class, "id", "book_id");
-    // }
-
-    // public function authors()
-    // {
-    //     return $this->belongsToMany(Author::class);
-    // }
+    // scope tanimlamasi
+    public function scopeName($query, $name)
+    {
+        if (!is_null($name))
+            return $query->where("name", "LIKE", "%" . $name . "%");
+    }
 }

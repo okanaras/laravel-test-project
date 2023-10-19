@@ -18,7 +18,6 @@ class AuthorFactory extends Factory
     {
         return [
             'name' => fake()->firstName,
-            'book_id' => random_int(1, 20)
         ];
     }
 }
