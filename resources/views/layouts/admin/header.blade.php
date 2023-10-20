@@ -9,6 +9,14 @@
                     </li>
                 </ul>
             </div>
+            <div class="container text-center mt-1"
+                style="
+                font-size: 18px;
+                font-weight: bold;
+            ">
+                &copy {{ date('Y') }} Case Study
+            </div>
+
         </div>
     </nav>
 </div>

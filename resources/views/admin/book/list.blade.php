@@ -59,10 +59,14 @@
                         </thead>
                         <tbody>
                             @foreach ($books as $book)
+                                {{-- silinme islemi gerceklestiginde anlik olarak satirin silinmesi icin row'a id verdim --}}
                                 <tr id="row-{{ $book->id }}">
                                     <td>{{ $book->title }}</td>
-                                    <td>{{ $book->authors?->name }}</td>
-                                    <td>{{ $book->publishers?->name }}</td>
+                                    {{-- burada egerki yazar adi varsa yazar adini yazacak yoksa string ifadeyi yazacak aynisi yayinevi icinde gecerli --}}
+                                    <td>{{ isset($book->authors?->name) ? $book->authors?->name : 'Yazar bulunamadi' }}
+                                    </td>
+                                    <td>{{ isset($book->publishers?->name) ? $book->authors?->name : 'Yayinevi bulunamadi' }}
+                                    </td>
                                     <td>{{ Carbon\Carbon::parse($book->created_at)->translatedFormat('d F Y') }}</td>
                                     <td>{{ Carbon\Carbon::parse($book->updated_at)->translatedFormat('d F Y') }}</td>
                                     <td>
@@ -151,7 +155,6 @@
                     }
                 })
             });
-
         });
     </script>
 @endsection
