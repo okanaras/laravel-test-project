@@ -19,6 +19,13 @@ class Author extends Model
         return $this->hasMany(Book::class, "author_id", "id");
     }
 
+    // polimorfik iliski
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
+
+
 
     // scope tanimlamasi
     public function scopeName($query, $name)

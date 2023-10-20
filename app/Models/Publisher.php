@@ -19,6 +19,12 @@ class Publisher extends Model
         return $this->hasMany(Book::class);
     }
 
+    // polimorfik iliski
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
+
     // scope tanimlamasi
     public function scopeName($query, $name)
     {

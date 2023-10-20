@@ -90,11 +90,26 @@
         $(document).ready(function() {
             $('#btnSave').click(function() {
                 if (name.val().trim() === "" || name.val().trim() == null) {
-                    alert("Title alani bos birakilamaz")
+                    Swal.fire({
+                        title: "Uyari",
+                        text: "Kitap basligi bos birakilamaz!",
+                        confirmButtonText: "Tamam",
+                        icon: "info"
+                    });
                 } else if (author_id.val().trim() === "" || author_id.val().trim() == null) {
-                    alert("Yazar alani bos birakilamaz")
+                    Swal.fire({
+                        title: "Uyari",
+                        text: "Yazar adi bos birakilamaz!",
+                        confirmButtonText: "Tamam",
+                        icon: "info"
+                    });
                 } else if (publisher_id.val().trim() === "" || publisher_id.val().trim() == null) {
-                    alert("Yayinci alani bos birakilamaz")
+                    Swal.fire({
+                        title: "Uyari",
+                        text: "Yayinevi adi bos birakilamaz!",
+                        confirmButtonText: "Tamam",
+                        icon: "info"
+                    });
                 } else {
                     $('#bookForm').submit();
                 }

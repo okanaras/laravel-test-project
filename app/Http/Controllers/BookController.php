@@ -21,6 +21,8 @@ class BookController extends Controller
             ])
             ->name($request->title)
             ->paginate(5);
+
+        // dd($books);
         return view("admin.book.list", compact("books"));
     }
 

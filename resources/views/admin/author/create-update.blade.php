@@ -60,7 +60,12 @@
         $(document).ready(function() {
             $('#btnSave').click(function() {
                 if (name.val().trim() === "" || name.val().trim() == null) {
-                    alert("Name alani bos birakilamaz")
+                    Swal.fire({
+                        title: "Uyari",
+                        text: "Yazar adi bos birakilamaz!",
+                        confirmButtonText: "Tamam",
+                        icon: "info"
+                    });
                 } else {
                     $('#authorForm').submit();
                 }
