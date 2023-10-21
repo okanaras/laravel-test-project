@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\PublisherController;
@@ -16,8 +18,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-Route::prefix("admin")->group(
+Route::prefix("admin")->middleware("auth")->group(
     function () {
         Route::get('/', function () {
             return view('home');
@@ -47,5 +48,17 @@ Route::prefix("admin")->group(
         Route::post("publisher/{id}/edit", [PublisherController::class, "update"]);
         Route::delete("publisher/delete", [PublisherController::class, "delete"])->name("publisher.delete");
 
+        // user routes
+        Route::get("users", [UserController::class, "index"])->name("user.index");
+        Route::get("users/create", [UserController::class, "create"])->name("user.create");
+        Route::post("users/create", [UserController::class, "store"]);
+        Route::get('users/{id}/edit', [UserController::class, "edit"])->name("user.edit");
+        Route::post('users/{id}/edit', [UserController::class, "update"]);
+        Route::delete('users/delete', [UserController::class, "delete"])->name("user.delete");
+
     }
 );
+
+Route::get("/login", [LoginController::class, "showLogin"])->name("login");
+Route::post("/login", [LoginController::class, "login"]);
+Route::post("/logout", [LoginController::class, "logout"])->name("logout");

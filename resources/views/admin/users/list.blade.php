@@ -1,7 +1,7 @@
 @extends('layouts.index')
 
 @section('title')
-    Book List
+    User List
 @endsection
 
 @section('css')
@@ -23,7 +23,7 @@
 @endsection
 
 @section('contentTitle')
-    Book List
+    User List
 @endsection
 
 @section('content')
@@ -34,9 +34,9 @@
                     {{-- filtreleme bolumu --}}
                     <form action="" method="get">
                         <div class="row">
-                            <div class="col-8 my-2 ">
-                                <input type="text" class="form-control" value="{{ request()->get('title') }}"
-                                    name="title" placeholder="Filtrelemek istediginiz kitap adi...">
+                            <div class="col-8 my-2">
+                                <input type="text" class="form-control" value="{{ request()->get('search_text') }}"
+                                    name="search_text" placeholder="Name, Username, Email">
                             </div>
 
                             <div class="col-4 my-2 mb-5 text-end justify-content-center d-flex">
@@ -49,38 +49,28 @@
                     <table class="display table table-striped table-hover" style="width:100%" role="grid">
                         <thead>
                             <tr>
-                                <th>Title</th>
-                                <th>Author</th>
-                                <th>Publisher</th>
-                                <th>User</th>
+                                <th>Name</th>
+                                <th>Email</th>
                                 <th>Created</th>
                                 <th>Updated</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($books as $book)
-                                {{-- silinme islemi gerceklestiginde anlik olarak satirin silinmesi icin row'a id verdim --}}
-                                <tr id="row-{{ $book->id }}">
-                                    <td>{{ $book->title }}</td>
-                                    {{-- burada egerki yazar adi varsa yazar adini yazacak yoksa string ifadeyi yazacak aynisi yayinevi icinde gecerli --}}
-                                    <td>{{ isset($book->authors?->name) ? $book->authors?->name : 'Yazar bulunamadi' }}
-                                    </td>
-                                    <td>{{ isset($book->publishers?->name) ? $book->publishers?->name : 'Yayinevi bulunamadi' }}
-                                    </td>
-                                    </td>
-                                    <td>{{ isset($book->users?->name) ? $book->users?->name : 'User bulunamadi' }}
-                                    </td>
-                                    <td>{{ Carbon\Carbon::parse($book->created_at)->translatedFormat('d F Y') }}</td>
-                                    <td>{{ Carbon\Carbon::parse($book->updated_at)->translatedFormat('d F Y') }}</td>
+                            @foreach ($users as $user)
+                                <tr id="row-{{ $user->id }}">
+                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->email }}</td>
+                                    <td>{{ Carbon\Carbon::parse($user->created_at)->translatedFormat('d F Y') }}</td>
+                                    <td>{{ Carbon\Carbon::parse($user->updated_at)->translatedFormat('d F Y') }}</td>
                                     <td>
                                         <div>
-                                            <a href="{{ route('book.edit', ['id' => $book->id]) }}"
+                                            <a href="{{ route('user.edit', ['id' => $user->id]) }}"
                                                 class="btn btn-warning btn-sm me-2">
                                                 <i class="material-icons ms-0">edit</i>
                                             </a>
                                             <a href="javascript:void(0)" class="btn btn-danger btn-sm btnDelete"
-                                                data-id="{{ $book->id }}" data-name="{{ $book->title }}">
+                                                data-id="{{ $user->id }}" data-name="{{ $user->name }}">
                                                 <i class="material-icons ms-0">delete</i>
                                             </a>
                                         </div>
@@ -90,10 +80,8 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th># Title</th>
-                                <th># Author</th>
-                                <th># Publisher</th>
-                                <th># User</th>
+                                <th># Name</th>
+                                <th># Email</th>
                                 <th># Created</th>
                                 <th># Updated</th>
                                 <th># Actions</th>
@@ -101,13 +89,17 @@
                         </tfoot>
                     </table>
                     <div class="d-flex justify-content-center">
-                        {{ $books->onEachside(1)->links() }}
+                        {{ $users->onEachside(1)->links() }}
                     </div>
                 </div>
             </div>
         </div>
     </div>
 @endsection
+
+@section('js')
+    <script src="{{ asset('assets/admin/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/plugins/bootstrap/js/popper.min.js') }}"></script>
 
 @section('js')
     <script>
@@ -119,7 +111,7 @@
                 let dataName = $(this).data('name');
 
                 Swal.fire({
-                    title: dataName + " kitabini silmek istediğinize emin misiniz?",
+                    title: dataName + " kullanicisini silmek istediğinize emin misiniz?",
                     showDenyButton: true,
                     showCancelButton: true,
                     confirmButtonText: 'Evet',
@@ -129,7 +121,7 @@
                     if (result.isConfirmed) {
                         $.ajax({
                             method: "POST",
-                            url: "{{ route('book.delete') }}",
+                            url: "{{ route('user.delete') }}",
                             data: {
                                 "_method": "DELETE",
                                 id: id
@@ -140,7 +132,7 @@
                                 $('#row-' + id).remove();
                                 Swal.fire({
                                     title: "Basarili",
-                                    text: "Kitap Silindi",
+                                    text: "Kullanici Silindi",
                                     confirmButtonText: 'Tamam',
                                     icon: "success"
                                 });
@@ -149,7 +141,6 @@
                                 console.log("hata geldi");
                             }
                         })
-
                     } else if (result.isDenied) {
                         Swal.fire({
                             title: "Bilgi",
@@ -161,5 +152,7 @@
                 })
             });
         });
+
+        $('#selectusers').select2();
     </script>
 @endsection

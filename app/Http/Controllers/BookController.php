@@ -17,7 +17,8 @@ class BookController extends Controller
         $books = Book::query()
             ->with([
                 "authors",
-                "publishers"
+                "publishers",
+                "users"
             ])
             ->name($request->title)
             ->paginate(5);
@@ -48,9 +49,13 @@ class BookController extends Controller
         // try cath ile kaydetme islemi gerceklestirilip onceki sayfaya yonlendirildi
         try {
             $book = new Book;
+            $book->user_id = auth()->id();
             $book->title = $request->title;
             $book->author_id = $request->author_id;
             $book->publisher_id = $request->publisher_id;
+
+
+            dd($book);
 
             $book->save();
 
@@ -98,9 +103,11 @@ class BookController extends Controller
         try {
             $book = Book::find($request->id);
 
+            $book->user_id = auth()->id();
             $book->title = $request->title;
             $book->author_id = $request->author_id;
             $book->publisher_id = $request->publisher_id;
+
 
             $book->save();
 

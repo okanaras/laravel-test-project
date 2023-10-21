@@ -14,7 +14,8 @@ class AuthorController extends Controller
     {
         $authors = Author::query()
             ->with([
-                "books"
+                "books",
+                "users"
             ])
             ->name($request->name)
             ->paginate(5);
@@ -39,9 +40,11 @@ class AuthorController extends Controller
         // try cath ile kaydetme islemi gerceklestirilip onceki sayfaya yonlendirildi
         try {
             $author = new Author;
+            $author->user_id = auth()->id();
             $author->name = $request->name;
 
             $author->save();
+
 
         } catch (\Exception $exception) {
             abort(404, $exception->getMessage());
@@ -79,7 +82,9 @@ class AuthorController extends Controller
             $author = Author::query()
                 ->where("id", $request->id)
                 ->first();
+            $author->user_id = auth()->id();
             $author->name = $request->name;
+
 
             $author->save();
 

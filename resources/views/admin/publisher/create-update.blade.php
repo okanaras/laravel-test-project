@@ -55,7 +55,6 @@
 
 @section('js')
     <script>
-        // post islemini buttonu submit'e cevirip te yapabilirdim ama ben hem bi degisiklik olsun hem de kendimi biraz denemek amacli bu sekilde gondermeyi daha uygun gordum. (kod fazlaligi konusunda hemfikirim:)
         let name = $('#name');
         $(document).ready(function() {
             $('#btnSave').click(function() {

@@ -52,6 +52,7 @@
                             <tr>
                                 <th>Name</th>
                                 <th>Book</th>
+                                <th>User</th>
                                 <th>Created</th>
                                 <th>Updated</th>
                                 <th>Actions</th>
@@ -64,6 +65,7 @@
                                     @foreach ($author->books as $book)
                                         <td>{{ $book->title }}</td>
                                     @endforeach
+                                    <td>{{ isset($book->users?->name) ? $book->users?->name : 'User bulunamadi' }}
                                     <td>{{ Carbon\Carbon::parse($author->created_at)->translatedFormat('d F Y') }}</td>
                                     <td>{{ Carbon\Carbon::parse($author->updated_at)->translatedFormat('d F Y') }}</td>
                                     <td>
@@ -85,6 +87,7 @@
                             <tr>
                                 <th># Name</th>
                                 <th># Book</th>
+                                <th># User</th>
                                 <th># Created</th>
                                 <th># Updated</th>
                                 <th># Actions</th>

@@ -15,6 +15,7 @@ class PublisherController extends Controller
         $publishers = Publisher::query()
             ->with([
                 "books",
+                "users"
             ])
             ->name($request->name)
             ->paginate(5);
@@ -39,6 +40,7 @@ class PublisherController extends Controller
         // try cath ile kaydetme islemi gerceklestirilip onceki sayfaya yonlendirildi
         try {
             $publisher = new Publisher;
+            $publisher->user_id = auth()->id();
             $publisher->name = $request->name;
 
             $publisher->save();
@@ -80,6 +82,7 @@ class PublisherController extends Controller
             $publisher = Publisher::query()
                 ->where("id", $request->id)
                 ->first();
+            $publisher->user_id = auth()->id();
             $publisher->name = $request->name;
 
             $publisher->save();

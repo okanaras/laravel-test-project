@@ -73,6 +73,35 @@
                     </li>
                 </ul>
             </li>
+            <li class="{{ Route::is('user.index') || Route::is('user.create') ? 'open' : '' }}">
+                <a href="javascript:void(0)" class="">
+                    <i class="material-icons">person</i>
+                    Users
+                    <i class="material-icons has-sub-menu">keyboard_arrow_right</i>
+                </a>
+                <ul class="sub-menu" style="">
+                    <li>
+                        <a href="{{ route('user.create') }}" class="{{ Route::is('user.create') ? 'active' : '' }}">
+                            Create User
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('user.index') }}" class="{{ Route::is('user.index') ? 'active' : '' }}">User
+                            List
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:void(0)" class=""
+                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <i class="material-icons">logout</i>
+                    Logout
+                </a>
+                <form action="{{ route('logout') }}" method="POST" id="logout-form">
+                    @csrf
+                </form>
+            </li>
         </ul>
     </div>
 </div>

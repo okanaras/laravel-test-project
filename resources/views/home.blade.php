@@ -25,12 +25,12 @@
 
 @section('content')
     <div class="row">
-        <div class="col-xl-4">
+        <div class="col-xl-3">
             <div class="card widget widget-stats">
                 <div class="card-body">
                     <div class="widget-stats-container d-flex">
-                        <div class="widget-stats-icon widget-stats-icon-warning">
-                            <i class="material-icons-outlined">person</i>
+                        <div class="widget-stats-icon widget-stats-icon-danger">
+                            <i class="material-icons-outlined">rate_review</i>
                         </div>
                         <div class="widget-stats-content flex-fill">
                             <span class="widget-stats-amount">
@@ -51,7 +51,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-4" data-aos="zoom-in-up" data-aos-duration="1000" data-aos-easing="ease-in-out">
+        <div class="col-xl-3" data-aos="zoom-in-up" data-aos-duration="1000" data-aos-easing="ease-in-out">
             <div class="card widget widget-stats">
                 <div class="card-body">
                     <div class="widget-stats-container d-flex">
@@ -77,7 +77,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-4" data-aos="zoom-in-up" data-aos-duration="1000" data-aos-easing="ease-in-out">
+        <div class="col-xl-3" data-aos="zoom-in-up" data-aos-duration="1000" data-aos-easing="ease-in-out">
             <div class="card widget widget-stats">
                 <div class="card-body">
                     <div class="widget-stats-container d-flex">
@@ -95,6 +95,32 @@
                             </div>
                             <div>
                                 <a href="{{ route('book.index') }}" class="firstTags">
+                                    <span>List</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3" data-aos="zoom-in-up" data-aos-duration="1000" data-aos-easing="ease-in-out">
+            <div class="card widget widget-stats">
+                <div class="card-body">
+                    <div class="widget-stats-container d-flex">
+                        <div class="widget-stats-icon widget-stats-icon-danger">
+                            <i class="material-icons-outlined">person</i>
+                        </div>
+                        <div class="widget-stats-content flex-fill">
+                            <span class="widget-stats-amount">
+                                <span class="main-header">Users</span>
+                            </span>
+                            <div>
+                                <a href="{{ route('user.create') }}" class="firstTags">
+                                    <span>Create</span>
+                                </a>
+                            </div>
+                            <div>
+                                <a href="{{ route('user.index') }}" class="firstTags">
                                     <span>List</span>
                                 </a>
                             </div>
