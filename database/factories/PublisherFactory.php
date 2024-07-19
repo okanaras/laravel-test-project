@@ -18,6 +18,7 @@ class PublisherFactory extends Factory
     {
         return [
             'name' => fake()->name,
+            'user_id' => random_int(1, 10)
         ];
     }
 }
